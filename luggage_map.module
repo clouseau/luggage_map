@@ -21,10 +21,18 @@ function luggage_map_field_map_form_submit(&$element, &$form_state) {
   }
 }
 
+/**
+ * @param $color - e.g. red,ylw,brown,..
+ * @return string - Url pointing to a marker image
+ */
 function _get_marker_url_using_color($color) {
   return 'http://maps.google.com/mapfiles/kml/paddle/' . $color . '-circle.png';
 }
 
+/**
+ * @param $color - e.g. red,ylw,brown,..
+ * @return array - Leaflet icon definition
+ */
 function _get_marker($color) {
   $iconurl = _get_marker_url_using_color($color);
   return array(
@@ -76,6 +84,11 @@ function _read_map_csv($uri) {
   );
 }
 
+/**
+ * @param $keys - An array of key/value pairs representing the content of a legend
+ * e.g. array('red' => 'The big group of groupings')
+ * @return string - A html string formatted as a one row table
+ */
 function _render_legend($keys) {
   $html = '<div><table><tr>';
   foreach($keys as $color => $value) {
