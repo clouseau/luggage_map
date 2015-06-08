@@ -21,6 +21,20 @@ function luggage_map_field_map_form_submit(&$element, &$form_state) {
   }
 }
 
+function _get_marker_url_using_color($color) {
+  return 'http://maps.google.com/mapfiles/kml/paddle/' . $color . '-circle.png';
+}
+
+function _get_marker($color) {
+  $iconurl = _get_marker_url_using_color($color);
+  return array(
+    'iconUrl' => $iconurl,
+    'iconSize' => array('x' => 30, 'y' => 30),
+    'iconAnchor' => array('x' => 15, 'y' => 30),
+    'popupAnchor' => array('x' => 0, 'y' => -35),
+  );
+}
+
 /**
  * Takes in a csv file containing geographical data to be mapped
  * Note: Row 1 is the heading row
@@ -43,17 +57,32 @@ function _read_map_csv($uri) {
   $file = fopen($uri,'r');
   $points = array();
   $header = fgetcsv($file);
+  $keys = array();
   while(!feof($file)) {
     $row = fgetcsv($file);
+    $keys[$row[4]] = $row[3];
     $points[] = array(
       'type' => 'point',
       'lat' => $row[1],
       'lon' => $row[2],
       'popup' => t($row[0]) . '\n ' . t($row[5]),
+      'icon' => _get_marker($row[4]),
     );
   }
   fclose($file);
-  return $points;
+  return array(
+    'keys' => $keys,
+    'body' => $points,
+  );
+}
+
+function _render_legend($keys) {
+  $html = '<div><table><tr>';
+  foreach($keys as $color => $value) {
+    $html .= '<td><img width="20px" height="auto" src="' . _get_marker_url_using_color($color) . '">&nbsp;<small>' . $value . '</small></td>';
+  }
+  $html .= '</tr></table></div>';
+  return $html;
 }
 
 /**
@@ -78,7 +107,9 @@ function luggage_map_field_formatter_view($entity_type, $entity, $field, $instan
     case 'luggage_map_output':
       foreach($items as $delta => $item) {
         $styles = leaflet_map_get_info('OSM Mapnik');
-        $map = leaflet_render_map($styles,_read_map_csv($item['uri']));
+        $data = _read_map_csv($item['uri']);
+        $map = leaflet_render_map($styles,$data['body']);
+        $map .= _render_legend($data['keys']);
         $element[$delta] = array(
           '#markup' => $map,
         );
