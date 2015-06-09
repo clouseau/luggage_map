@@ -85,20 +85,6 @@ function _read_map_csv($uri) {
 }
 
 /**
- * @param $keys - An array of key/value pairs representing the content of a legend
- * e.g. array('red' => 'The big group of groupings')
- * @return string - A html string formatted as a one row table
- */
-function _render_legend($keys) {
-  $html = '<table class="leaflet-map-legend"><tr>';
-  foreach($keys as $color => $value) {
-    $html .= '<td><img width="20px" height="auto" src="' . _get_marker_url_using_color($color) . '">&nbsp;<small>' . $value . '</small></td>';
-  }
-  $html .= '</table></div>';
-  return $html;
-}
-
-/**
  * Implements hook_field_formatter_info()
  */
 function luggage_map_field_formatter_info() {
