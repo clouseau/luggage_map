@@ -73,7 +73,7 @@ function _read_map_csv($uri) {
       'type' => 'point',
       'lat' => $row[1],
       'lon' => $row[2],
-      'popup' => t($row[0]) . '\n ' . t($row[5]),
+      'popup' => t($row[0]) . '<br> ' . t($row[5]),
       'icon' => _get_marker($row[4]),
     );
   }
