@@ -90,11 +90,11 @@ function _read_map_csv($uri) {
  * @return string - A html string formatted as a one row table
  */
 function _render_legend($keys) {
-  $html = '<div><table><tr>';
+  $html = '<table class="leaflet-map-legend"><tr>';
   foreach($keys as $color => $value) {
     $html .= '<td><img width="20px" height="auto" src="' . _get_marker_url_using_color($color) . '">&nbsp;<small>' . $value . '</small></td>';
   }
-  $html .= '</tr></table></div>';
+  $html .= '</table></div>';
   return $html;
 }
 
@@ -122,11 +122,17 @@ function luggage_map_field_formatter_view($entity_type, $entity, $field, $instan
         $styles = leaflet_map_get_info('OSM Mapnik');
         $data = _read_map_csv($item['uri']);
         $map = leaflet_render_map($styles,$data['body']);
-        $map .= _render_legend($data['keys']);
+//        $map .= _render_legend($data['keys']);
+        $variables = array(
+          'keys' => $data['keys'],
+          'map' => $map,
+        );
         $element[$delta] = array(
-          '#markup' => $map,
+          '#markup' => theme_render_template(drupal_get_path('module','luggage_map') . '/templates/leaflet_legend.tpl.php',$variables),
         );
       }
+      drupal_add_css(drupal_get_path('module','luggage_map') . '/css/leaflet_map.css');
+      drupal_add_js(drupal_get_path('module','luggage_map') . '/js/leaflet_map.js');
       break;
   }
   return $element;

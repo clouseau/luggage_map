@@ -1,0 +1,92 @@
+.leaflet-map-controls-wrapper .leaflet-map-controls,
+.leaflet-map-controls ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaflet-map-controls>ul>li {
+    display: inline-block;
+}
+
+.leaflet-dropdown-wrapper {
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-weight: bold;
+    position: relative;
+    max-width: 200px;
+    width: 200px;
+}
+
+.leaflet-dropdown-wrapper .grouping {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.leaflet-dropdown-wrapper .leaflet-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1001;
+    margin: 0 -1px;
+    padding: 0;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.leaflet-dropdown>li {
+    display: none;
+}
+
+.leaflet-dropdown>li>a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    background-color: #fff;
+    text-decoration: none;
+}
+
+.leaflet-dropdown>li>a:hover {
+    background-color: #f2f2f2;
+}
+
+.leaflet-dropdown-wrapper .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+}
+
+/*.leaflet-grouping-color-ylw {*/
+    /*border-left: 4px solid yellow;*/
+/*}*/
+
+/*.leaflet-grouping-color-grn {*/
+    /*border-left: 4px solid green;*/
+/*}*/
+
+/*.leaflet-grouping-color-red {*/
+    /*border-left: 4px solid red;*/
+/*}*/
+
+/*.leaflet-grouping-color-brown {*/
+    /*border-left: 4px solid brown;*/
+/*}*/
+
+/*.leaflet-grouping-color-orange {*/
+    /*border-left: 4px solid orange;*/
+/*}*/
+
+.leaflet-map-legend {
+    margin-top: 0;
+}
