@@ -4,19 +4,13 @@
  * Drupal needs this blank file.
  */
 function luggage_map_field_widget_form_alter(&$element) {
-  if(isset($element['#field_name']) && $element['#field_name'] == 'field_map') {
+  if (isset($element['#field_name']) && $element['#field_name'] == 'field_map') {
       $element['#element_validate'][] = 'luggage_map_field_map_form_submit';
-//    foreach($element as $index => $el) {
-//      if(is_int($index)) {
-//        $element[$index]['#submit'][] = 'luggage_map_field_map_form_submit';
-//        $element[$index]['#executes_submit_callback'] = TRUE;
-//      }
-//    }
   }
 }
 
 function luggage_map_field_map_form_submit(&$element, &$form_state) {
-  if($element) {
+  if ($element) {
     $uri = $element[0]['#file']->uri;
   }
 }
@@ -62,11 +56,11 @@ function _get_marker($color) {
  * @param $uri - The uri of data file to be opened (e.g public://data.csv)
  */
 function _read_map_csv($uri) {
-  $file = fopen($uri,'r');
+  $file = fopen($uri, 'r');
   $points = array();
   $header = fgetcsv($file);
   $keys = array();
-  while(!feof($file)) {
+  while (!feof($file)) {
     $row = fgetcsv($file);
     $keys[$row[4]] = $row[3];
     $points[] = array(
@@ -102,23 +96,23 @@ function luggage_map_field_formatter_info() {
  */
 function luggage_map_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
-  switch($display['type']) {
+  switch ($display['type']) {
     case 'luggage_map_output':
-      foreach($items as $delta => $item) {
+      foreach ($items as $delta => $item) {
         $styles = leaflet_map_get_info('OSM Mapnik');
         $data = _read_map_csv($item['uri']);
-        $map = leaflet_render_map($styles,$data['body']);
+        $map = leaflet_render_map($styles, $data['body']);
 //        $map .= _render_legend($data['keys']);
         $variables = array(
           'keys' => $data['keys'],
           'map' => $map,
         );
         $element[$delta] = array(
-          '#markup' => theme_render_template(drupal_get_path('module','luggage_map') . '/templates/leaflet_legend.tpl.php',$variables),
+          '#markup' => theme_render_template(drupal_get_path('module', 'luggage_map') . '/templates/leaflet_legend.tpl.php', $variables),
         );
       }
-      drupal_add_css(drupal_get_path('module','luggage_map') . '/css/leaflet_map.css');
-      drupal_add_js(drupal_get_path('module','luggage_map') . '/js/leaflet_map.js');
+      drupal_add_css(drupal_get_path('module', 'luggage_map') . '/css/leaflet_map.css');
+      drupal_add_js(drupal_get_path('module', 'luggage_map') . '/js/leaflet_map.js');
       break;
   }
   return $element;
