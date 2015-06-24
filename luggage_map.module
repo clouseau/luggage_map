@@ -17,7 +17,7 @@ function luggage_map_field_map_form_submit(&$element, &$form_state) {
 
 /**
  * @param $color - e.g. red,ylw,brown,..
- * @return string - Url pointing to a marker image
+ * @return string - URL pointing to a marker image
  */
 function _get_marker_url_using_color($color) {
   return 'http://maps.google.com/mapfiles/kml/paddle/' . $color . '-circle.png';
@@ -38,8 +38,8 @@ function _get_marker($color) {
 }
 
 /**
- * Takes in a csv file containing geographical data to be mapped
- * Note: Row 1 is the heading row
+ * Takes in a CSV file containing geographic data to be mapped.
+ * Note: Row 1 is the heading row.
  *
  * =================== Data Format =======================================================
  *
@@ -53,7 +53,7 @@ function _get_marker($color) {
  *
  * =======================================================================================
  *
- * @param $uri - The uri of data file to be opened (e.g public://data.csv)
+ * @param $uri - The URI of data file to be opened (e.g., public://data.csv)
  */
 function _read_map_csv($uri) {
   $file = fopen($uri, 'r');
