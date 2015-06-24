@@ -56,7 +56,7 @@ function _luggage_map_get_marker($color) {
  *
  * @param $uri - The uri of data file to be opened (e.g public://data.csv)
  */
-function _read_map_csv($uri) {
+function _luggage_map_read_map_csv($uri) {
   $file = fopen($uri, 'r');
   $points = array();
   $header = fgetcsv($file);
@@ -101,7 +101,7 @@ function luggage_map_field_formatter_view($entity_type, $entity, $field, $instan
     case 'luggage_map_output':
       foreach ($items as $delta => $item) {
         $styles = leaflet_map_get_info('OSM Mapnik');
-        $data = _read_map_csv($item['uri']);
+        $data = _luggage_map_read_map_csv($item['uri']);
         $map = leaflet_render_map($styles, $data['body']);
 //        $map .= _render_legend($data['keys']);
         $variables = array(
