@@ -1,8 +1,9 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Transform a CSV file into a map.
  */
+ 
 function luggage_map_field_widget_form_alter(&$element) {
   if (isset($element['#field_name']) && $element['#field_name'] == 'field_map') {
       $element['#element_validate'][] = 'luggage_map_field_map_form_submit';
