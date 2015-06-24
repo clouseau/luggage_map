@@ -19,7 +19,7 @@ function luggage_map_field_map_form_submit(&$element, &$form_state) {
  * @param $color - e.g. red,ylw,brown,..
  * @return string - Url pointing to a marker image
  */
-function _get_marker_url_using_color($color) {
+function _luggage_map_get_marker_url_using_color($color) {
   return 'http://maps.google.com/mapfiles/kml/paddle/' . $color . '-circle.png';
 }
 
@@ -27,8 +27,8 @@ function _get_marker_url_using_color($color) {
  * @param $color - e.g. red,ylw,brown,..
  * @return array - Leaflet icon definition
  */
-function _get_marker($color) {
-  $iconurl = _get_marker_url_using_color($color);
+function _luggage_map_get_marker($color) {
+  $iconurl = _luggage_map_get_marker_url_using_color($color);
   return array(
     'iconUrl' => $iconurl,
     'iconSize' => array('x' => 30, 'y' => 30),
@@ -68,7 +68,7 @@ function _read_map_csv($uri) {
       'lat' => $row[1],
       'lon' => $row[2],
       'popup' => t($row[0]) . '<br> ' . t($row[5]),
-      'icon' => _get_marker($row[4]),
+      'icon' => _luggage_map_get_marker($row[4]),
     );
   }
   fclose($file);
