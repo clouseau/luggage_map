@@ -35,6 +35,7 @@ Brown | brown
   * *With Drush: `drush @site.server en luggage_map -y`*
   * .. or using the modules page
 1. Navigate to the content type where you want the field and add a 'file' field. Save!
+2. Edit the file field's settings & allow `CSV` files to be uploaded.
 1. Under the 'Manage Display' tab, locate the field that you just added and change the format to *'Luggage Map Output Map'*. Save!
 1. Create/edit a node of the previous type and upload a csv file using the aforementioned format. Save!
 
