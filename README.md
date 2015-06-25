@@ -31,6 +31,7 @@ Brown | brown
 1. Clone this repo into your Drupal's `sites/all/modules/luggage_map` directory.
 1. Download & extract the [Leaflet Javascript library][leafletjs] into your Drupal's `sites/all/libaries/leaflet`.
   * *Note: you will need to rename the downloaded folder from `leaflet-0.x.y` to `leaflet`*
+  * *Check permissions!*
 1. Enable the module
   * *With Drush: `drush @site.server en luggage_map -y`*
   * .. or using the modules page
